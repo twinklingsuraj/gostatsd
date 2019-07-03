@@ -1,3 +1,7 @@
+17.0.2
+------
+- Moved more noisy log lines to be debug instead of info
+
 17.0.1
 ------
 - Moved noisy log line from info to debug
