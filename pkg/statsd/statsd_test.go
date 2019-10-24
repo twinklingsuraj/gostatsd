@@ -8,8 +8,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/sirupsen/logrus"
+
 	"github.com/atlassian/gostatsd"
 	"github.com/atlassian/gostatsd/pkg/fakesocket"
+	"github.com/atlassian/gostatsd/pkg/transport"
 
 	"github.com/spf13/viper"
 	"golang.org/x/time/rate"
@@ -44,6 +47,7 @@ func TestStatsdThroughput(t *testing.T) {
 		ReceiveBatchSize:    DefaultReceiveBatchSize,
 		MaxConcurrentEvents: 2,
 		ServerMode:          "standalone",
+		TransportPool:       transport.NewTransportPool(logrus.StandardLogger(), viper.New()),
 		CacheOptions: CacheOptions{
 			CacheRefreshPeriod:        DefaultCacheRefreshPeriod,
 			CacheEvictAfterIdlePeriod: DefaultCacheEvictAfterIdlePeriod,
