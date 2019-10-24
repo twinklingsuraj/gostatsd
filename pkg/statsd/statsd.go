@@ -199,6 +199,9 @@ func (s *Server) RunWithCustomSocket(ctx context.Context, sf SocketFactory) erro
 		runnables = append(runnables, server.Run)
 	}
 
+	// Make sure the TransportPool metrics are ready
+	runnables = append(runnables, s.TransportPool.RunMetrics)
+
 	// Start the world!
 	runCtx := stats.NewContext(context.Background(), statser)
 	stgr := stager.New()
